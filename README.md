@@ -2,7 +2,7 @@
 # Django——应用app之增删改查
 
 最近由于工作忙以及家庭琐事等原因，好久没写文章了。趁今天空闲之余，分享这篇初级Django的应用app入门文章，欢迎大家批评指正。话不多说，直接开始。
-##1.创建应用user##
+## 1.创建应用user
 在项目下执行此命令
 ```
  (base) gn:fish wind$ python3 manage.py startapp user
@@ -23,17 +23,17 @@ INSTALLED_APPS = [
     'user.apps.UserConfig'
 ]
 ```
-###2.迁移文件同步到数据库
+### 2.迁移文件同步到数据库
 然后执行这两条命令，同步文件到数据库
 ```
 (base) gn:fish wind$ python3 manage.py makemigrations
 (base) gn:fish wind$ python3 manage.py migrate
 ```
 执行这些命令后，就会在项目下生成此user应用。
-###3.应用app结构
+### 3.应用app结构
 ![应用结构.png](https://upload-images.jianshu.io/upload_images/13222032-af155e679e996c37.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-####a).admin.py
+#### a).admin.py
 如下图所示，此处注册你编写的数据model，可以单个也可以多个
 ```
 from django.contrib import admin
@@ -44,7 +44,7 @@ from .models import User
 
 admin.site.register([User])
 ```
-####b)apps.py
+#### b)apps.py
 此处可以更改应用的名字
 ```
 from django.apps import AppConfig
@@ -52,7 +52,7 @@ from django.apps import AppConfig
 class UserConfig(AppConfig):
     name = 'user'
 ```
-####c)models.py
+#### c)models.py
 此处编写model，定义数据字段。如下示例，定义一个User数据，包含id，name，age，phone，address
 ```
 from django.db import models
@@ -69,9 +69,9 @@ class User(models.Model):
     def __str__(self):
         return self.user_name
 ```
-####d)test.py
+#### d)test.py
 测试文件，暂不编写
-####e)urls.py
+#### e)urls.py
 定义路由名，如下所示。分别是查询用户列表、新增用户、编辑用户、删除用户、查询用户
 ```
 from django.urls import path, include
@@ -85,9 +85,9 @@ urlpatterns = [
     path('search/<int:user_id>', user.views.search_user),
 ]
 ```
-####f)views.py
+#### f)views.py
 编写具体的业务方法。
-#####（1)导入文件
+#### (1)导入文件
 ```
 # -*-coding:utf-8 -*-
 
@@ -95,7 +95,7 @@ from django.http import JsonResponse
 
 from user.models import User
 ```
-#####（2）查询用户列表
+#### (2）查询用户列表
 ```
 # 获取用户列表
 def get_user_list(requset):
@@ -114,7 +114,7 @@ def get_user_list(requset):
 postman 调用结果：
 ![查询用户列表.png](https://upload-images.jianshu.io/upload_images/13222032-b6b6d776fbd23dd0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-#####(3)添加用户
+#### (3)添加用户
 ```
 # 添加用户
 def add_user(request):
@@ -132,7 +132,7 @@ def add_user(request):
 postman调用结果：
 ![新增用户.png](https://upload-images.jianshu.io/upload_images/13222032-42aa2bef94286e28.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-#####(4)编辑用户
+#### (4)编辑用户
 ```
 # 编辑用户
 def edit_user(request, user_id):
@@ -157,7 +157,7 @@ def edit_user(request, user_id):
 postman调用结果：
 ![编辑用户.png](https://upload-images.jianshu.io/upload_images/13222032-31b1a20c62c2445c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-#####(5)删除用户
+#### (5)删除用户
 ```
 # 删除用户
 def delete_user(request, user_id):
@@ -172,7 +172,7 @@ def delete_user(request, user_id):
 postman调用结果：
 ![删除用户.png](https://upload-images.jianshu.io/upload_images/13222032-5265d1c2a12d5d7c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-#####（6）搜索用户
+#### (6）搜索用户
 ```
 # 搜索用户
 def search_user(request, user_id):
@@ -192,7 +192,7 @@ def search_user(request, user_id):
 postman调用结果：
 ![查询用户.png](https://upload-images.jianshu.io/upload_images/13222032-c222d207e53e2499.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-###补充说明：
+### 补充说明：
 要想接口跑通，还需在主项目urls.py文件下添加应用路由，如下所示：
 ```
 from django.contrib import admin
