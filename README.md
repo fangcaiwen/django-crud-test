@@ -1,8 +1,8 @@
 # django-crud-test
-Django——应用app之增删改查
+# Django——应用app之增删改查
 
 最近由于工作忙以及家庭琐事等原因，好久没写文章了。趁今天空闲之余，分享这篇初级Django的应用app入门文章，欢迎大家批评指正。话不多说，直接开始。
-###1.创建应用user
+##1.创建应用user##
 在项目下执行此命令
 ```
  (base) gn:fish wind$ python3 manage.py startapp user
